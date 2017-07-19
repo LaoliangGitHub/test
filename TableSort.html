@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一个超简单的表格排序</title>
+<script>
+window.onload=function()
+{
+    var oBtn=document.getElementById('btn');
+    var oTable=document.getElementById('table');
+    
+    oBtn.onclick=function()
+    {
+        var arr=[];
+        for(var i=0;i<oTable.tBodies[0].rows.length;i++)//tBodies获取table下的tbody（排除了thead）
+        {
+            arr[i]=oTable.tBodies[0].rows[i]; //把所有的tbody下的tr添加到数组中(for循环添加)
+        };
+        
+        arr.sort(function(tr1,tr2){//对arr数组进行排序 传入两个数组元素
+            n1=parseInt(tr1.cells[0].innerHTML) // 根据tr下的第一个元素td的值进行排序
+            n2=parseInt(tr2.cells[0].innerHTML)
+            return n1-n2; //升序 数组里的元素进行重新排序（根据一个）
+        });    
+        
+        for(var i=0;i<arr.length;i++)//遍历整个数组
+        {
+            oTable.tBodies[0].appendChild(arr[i]);//将数组for循环添加到tbody中
+        };
+    };
+};
+</script>
+</head>
+
+<body>
+<input type="button" value="ID排序" id="btn" />
+<table id="table" border="1" width="100%" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>专业</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>58</td>
+            <td>189</td>
+            <td>网站设计</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>29</td>
+            <td>网站设计</td>
+        </tr>
+        <tr>
+            <td>98</td>
+            <td>980</td>
+            <td>物流</td>
+        </tr>
+        <tr>
+            <td>87</td>
+            <td>57</td>
+            <td>物流</td>
+        </tr>
+        <tr>
+            <td>43</td>
+            <td>68</td>
+            <td>物流</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
